@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACIENTES</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><b>ATLAS</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="paciente.html">Pacientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="doctor.html">Doctores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cita.html">Citas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="historialPaciente.html">Historial Paciente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recetaMedica.html">Receta Médica</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <!-- Contenido de la página actual -->
+                <h1 class="text-center mb-4"><b>Manejo de Pacientes</b></h1>
+                <div class="text-end mb-3">
+                    <!-- Botón para abrir modal -->
+                    <button type="button" class="btn btn-primary text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <b>Registrar Paciente</b>
+                    </button>
+                </div>
+
+                <!-- Tabla de pacientes -->
+                <div class="table-responsive">
+                    <table id="tbl_pacientes" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>APELLIDO</th>
+                                <th>FECHA NACIMIENTO</th>
+                                <th>DIRECCIÓN</th>
+                                <th>TELÉFONO</th>
+                                <th>CORREO ELECTRÓNICO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pacientes-tbody">
+                            <tr>
+                                <td colspan="7">Cargando datos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Paciente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="frm_nuevo_paciente">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label"><b>Nombre:</b></label>
+                            <input type="text" name="nombre" id="nombre" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label"><b>Apellido:</b></label>
+                            <input type="text" name="apellido" id="apellido" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_nacimiento" class="form-label"><b>Fecha de Nacimiento:</b></label>
+                            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label"><b>Dirección:</b></label>
+                            <input type="text" name="direccion" id="direccion" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label"><b>Teléfono:</b></label>
+                            <input type="number" name="telefono" id="telefono" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo_electronico" class="form-label"><b>Correo Electrónico:</b></label>
+                            <input type="email" name="correo_electronico" id="correo_electronico" class="form-control">
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success me-2">Guardar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <footer class="bg-primary text-center py-3 mt-auto">
+        <br>
+        <p class="text-dark"><b>Realizado por @Lenin Flores</b></p>
+    </footer>
+</body>
+
+<!-- Scripts -->
+<script>
+        $(document).ready(function () {
+            // Función para cargar pacientes
+            function cargarPacientes() {
+                $.ajax({
+                    url: 'http://184.73.255.67:5000/api/pacientes',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (Array.isArray(data)) {
+                            let pacientesHTML = '';
+                            data.forEach(paciente => {
+                                // Obtener solo la fecha (sin la hora)
+                                let fechaNacimiento = paciente.fecha_nacimiento.slice(0, 10);
+
+                                pacientesHTML += `
+                                    <tr>
+                                        <td>${paciente.id}</td>
+                                        <td>${paciente.nombre}</td>
+                                        <td>${paciente.apellido}</td>
+                                        <td>${fechaNacimiento}</td> <!-- Mostrar solo la fecha -->
+                                        <td>${paciente.direccion}</td>
+                                        <td>${paciente.telefono}</td>
+                                        <td>${paciente.correo_electronico}</td>
+                                    </tr>`;
+                            });
+                            $('#pacientes-tbody').html(pacientesHTML);
+
+                            // Destruir instancia de DataTables si ya está inicializada
+                            if ($.fn.DataTable.isDataTable('#tbl_pacientes')) {
+                                $('#tbl_pacientes').DataTable().destroy();
+                            }
+
+                            // Inicializar DataTable después de cargar datos
+                            $('#tbl_pacientes').DataTable({
+                                "language": {
+                                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/Spanish.json"
+                                }
+                            });
+                        } else {
+                            $('#pacientes-tbody').html('<tr><td colspan="7">No se encontraron datos</td></tr>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error en la solicitud:", xhr);
+                        $('#pacientes-tbody').html('<tr><td colspan="7">Error al cargar los datos</td></tr>');
+                    }
+                });
+            }
+
+            // Cargar pacientes cuando el documento esté listo
+            cargarPacientes();
+
+            // Manejo del formulario para agregar nuevo paciente
+            $("#frm_nuevo_paciente").on('submit', function (event) {
+                event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+                // Obtener el valor del campo fecha_nacimiento y formatearlo
+                var fechaNacimiento = $("#fecha_nacimiento").val();
+                var fechaFormateada = new Date(fechaNacimiento).toISOString().slice(0, 19).replace('T', ' ');
+
+                $.ajax({
+                    url: 'http://184.73.255.67:5000/api/pacientes',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json', // Asegúrate de enviar JSON
+                    data: JSON.stringify({
+                        nombre: $("#nombre").val(),
+                        apellido: $("#apellido").val(),
+                        fecha_nacimiento: fechaFormateada,
+                        direccion: $("#direccion").val(),
+                        telefono: $("#telefono").val(),
+                        correo_electronico: $("#correo_electronico").val()
+                    }),
+                    success: function (data) {
+                        console.log(data);
+                        if (data.estado) {
+                            Swal.fire({
+                                title: "CONFIRMACIÓN",
+                                text: data.mensaje,
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $("#exampleModal").modal('hide');
+                                    $("#frm_nuevo_paciente")[0].reset(); // Limpiar formulario
+                                    cargarPacientes(); // Actualizar la tabla de pacientes
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "CONFIRMACIÓN",
+                                text: data.mensaje,
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $("#exampleModal").modal('hide');
+                                    $("#frm_nuevo_paciente")[0].reset(); // Limpiar formulario
+
+                                    // Destruir la instancia actual de DataTable si existe
+                                    if ($.fn.DataTable.isDataTable('#tbl_pacientes')) {
+                                        $('#tbl_pacientes').DataTable().destroy();
+                                    }
+
+                                    // Actualizar y reinicializar DataTable
+                                    cargarPacientes();
+                                }
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error en la solicitud:", xhr.responseText);
+                        Swal.fire({
+                            title: "ERROR",
+                            text: "Hubo un problema con la solicitud.",
+                            icon: 'error'
+                        });
+                    }
+                });
+            });
+        });
+</script>
+
+</html>
