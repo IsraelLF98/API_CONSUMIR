@@ -142,7 +142,7 @@
             // Función para cargar pacientes
             function cargarPacientes() {
                 $.ajax({
-                    url: 'http://184.73.255.67:5000/api/pacientes',
+                    url: 'https://184.73.255.67:5000/api/pacientes',
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
@@ -200,7 +200,7 @@
                 var fechaFormateada = new Date(fechaNacimiento).toISOString().slice(0, 19).replace('T', ' ');
 
                 $.ajax({
-                    url: 'http://184.73.255.67:5000/api/pacientes',
+                    url: 'https://184.73.255.67:5000/api/pacientes',
                     type: 'POST',
                     dataType: 'json',
                     contentType: 'application/json', // Asegúrate de enviar JSON
